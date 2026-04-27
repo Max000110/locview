@@ -35,37 +35,46 @@ Docker| ✅ Supported| Dockerfile included
 
 📦 Installation
 
-Clone Repository
+Full Install (Recommended)
 
 git clone https://github.com/Max000110/locview.git
 cd locview
 
----
-
-Install Dependencies
+pkg update && pkg upgrade -y
+pkg install python git termux-api -y
+termux-setup-storage
 
 pip install -r requirements.txt
 pip install -e .
 
 ---
 
-Android / Termux Setup
-
-pkg update && pkg upgrade
-pkg install python git termux-api
-termux-setup-storage
+🚀 Usage
 
 ---
 
-🚀 Usage
-
-Launch Interactive TUI Dashboard
+🖥 Launch Interactive TUI Dashboard
 
 locview tui
 
+Use TUI when you want visual interactive scanning/dashboard workflow.
+
 ---
 
-Standard Coordinate Scan
+🧠 CLI Command Guide
+
+---
+
+📍 Standard Coordinate Scan
+
+Scans a single coordinate and returns:
+
+- Address
+- Weather
+- Nearby POIs
+- Risk Score
+- Satellite Screenshot
+- HTML/PDF Reports
 
 locview scan \
   --lat 19.1606 \
@@ -73,7 +82,9 @@ locview scan \
 
 ---
 
-Scan + Open Google Maps
+🗺 Scan + Open Google Maps
+
+Same as standard scan, but auto-opens Google Maps.
 
 locview scan \
   --lat 19.1606 \
@@ -82,7 +93,9 @@ locview scan \
 
 ---
 
-Polygon / Area Heatmap Scan
+🔥 Polygon / Area Heatmap Scan
+
+Scans a full bounding box area and generates hotspot heatmap.
 
 locview polygon \
   --lat-min 19.15 \
@@ -92,7 +105,9 @@ locview polygon \
 
 ---
 
-Compare Multiple Locations
+📊 Compare Multiple Locations
+
+Compare multiple coordinates to identify best location.
 
 locview compare \
   --coords \
@@ -101,7 +116,9 @@ locview compare \
 
 ---
 
-Add Geofence
+🚨 Add Geofence
+
+Create saved geofence alert region.
 
 locview geofence-add \
   --name "Home" \
@@ -111,7 +128,9 @@ locview geofence-add \
 
 ---
 
-Check Geofence Trigger
+📡 Check Geofence Trigger
+
+Check whether coordinate enters saved geofence.
 
 locview geofence-check \
   --lat 19.1606 \
@@ -119,7 +138,9 @@ locview geofence-check \
 
 ---
 
-Trend Analysis
+📈 Trend Analysis
+
+Analyze historical POI/intel trends for coordinate.
 
 locview trend \
   --lat 19.1606 \
@@ -127,7 +148,9 @@ locview trend \
 
 ---
 
-Live Tracking
+🛰 Live Tracking
+
+Track movement across multiple coordinates.
 
 locview track \
   --points \
@@ -151,6 +174,8 @@ Satellite Screenshots
 ---
 
 🛠 Troubleshooting
+
+---
 
 POI API Rate Limits (429 / 504)
 
