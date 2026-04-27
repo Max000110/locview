@@ -1,0 +1,12 @@
+requests
+rich
+geopy
+timezonefinder
+folium
+jinja2
+reportlab
+textual
+pillow
+sqlite-utils
+openlocationcode
+diskcache
