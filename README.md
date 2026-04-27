@@ -1,191 +1,150 @@
 🌍 LocView
 
-Advanced Geospatial Intelligence Toolkit for Terminal & TUI
+«Advanced Geospatial Intelligence & Reconnaissance Toolkit
+Terminal-first location intelligence platform for geospatial scanning, hotspot analysis, and interactive reconnaissance workflows.»
 
-LocView is a powerful reconnaissance and geospatial analysis toolkit built for terminal-first users.
-It provides:
+---
 
-- 📍 Reverse Geocoding
-- 🌦 Weather Intelligence
-- 🛰 Satellite Screenshot Fetching
-- 🏢 Nearby POI Detection
-- 📊 Polygon / Area Scanning
-- 🔥 Heatmap Visualization
-- 📄 HTML / PDF Reporting
-- 📡 Live Tracking
-- 🚨 Geofence Alerts
-- 🧠 Risk / Threat Scoring
-- 📈 Trend Analysis
+✨ Features
+
+- 📍 Reverse Geocoding & Address Resolution
+- 🌦 Real-Time Weather Intelligence
+- 🛰 Satellite / Static Map Screenshot Capture
+- 🏢 Nearby POI Enumeration
+- 🔥 Polygon / Bounding Box Heatmap Scanning
+- 📊 Hotspot Visualization & Risk Scoring
+- 📄 HTML / PDF Report Export
+- 🚨 Geofence Alerting
+- 📈 Trend Analysis Engine
+- 📡 Live Coordinate Tracking
 - 🖥 Interactive TUI Dashboard
+- 🔌 Plugin-Based Provider Architecture
+
+---
+
+💻 Supported Platforms
+
+Platform| Supported| Notes
+Android (Termux)| ✅ Full Support| Primary target platform
+Linux| ✅ Full Support| Native support
+macOS| ⚠ Partial| May require minor adjustments
+Windows| ⚠ Experimental| Best via WSL
+Docker| ✅ Supported| Dockerfile included
 
 ---
 
 📦 Installation
 
-Step 1 — Clone Repository
+Clone Repository
 
 git clone https://github.com/Max000110/locview.git
 cd locview
 
 ---
 
-Step 2 — Install Dependencies
+Install Dependencies
 
 pip install -r requirements.txt
 pip install -e .
 
 ---
 
-Step 3 — Run LocView
+Android / Termux Setup
 
-locview --help
+pkg update && pkg upgrade
+pkg install python git termux-api
+termux-setup-storage
 
 ---
 
-🚀 Quick Start
+🚀 Usage
 
-Launch Dashboard UI
+Launch Interactive TUI Dashboard
 
 locview tui
 
-This opens the full interactive terminal dashboard.
+---
+
+Standard Coordinate Scan
+
+locview scan \
+  --lat 19.1606 \
+  --lon 72.8479
 
 ---
 
-🧩 Features Overview
+Scan + Open Google Maps
+
+locview scan \
+  --lat 19.1606 \
+  --lon 72.8479 \
+  --open
 
 ---
 
-1. Standard Location Scan
-
-Scans one coordinate and shows:
-
-- Address
-- Weather
-- Nearby POIs
-- Risk Score
-- Satellite Screenshot
-- Export Reports
-
-locview scan --lat 19.1606 --lon 72.8479
-
----
-
-2. Open Google Maps After Scan
-
-locview scan --lat 19.1606 --lon 72.8479 --open
-
----
-
-3. Compare Multiple Locations
-
-Compare multiple coordinates for best location.
-
-locview compare \
---coords "19.1606,72.8479" "19.1700,72.8500"
-
----
-
-4. Polygon / Area Scan
-
-Scan an entire area and rank hotspots.
+Polygon / Area Heatmap Scan
 
 locview polygon \
---lat-min 19.1500 \
---lon-min 72.8300 \
---lat-max 19.1800 \
---lon-max 72.8600
+  --lat-min 19.15 \
+  --lon-min 72.84 \
+  --lat-max 19.17 \
+  --lon-max 72.86
 
 ---
 
-5. Live Tracking
+Compare Multiple Locations
 
-Track coordinate movement over time.
-
-locview track \
---points "19.1606,72.8479" "19.1700,72.8500"
+locview compare \
+  --coords \
+  "19.1606,72.8479" \
+  "19.1700,72.8500"
 
 ---
 
-6. Geofence Add
-
-Create alert zones.
+Add Geofence
 
 locview geofence-add \
---name "Home" \
---lat 19.1606 \
---lon 72.8479 \
---radius 500
+  --name "Home" \
+  --lat 19.1606 \
+  --lon 72.8479 \
+  --radius 500
 
 ---
 
-7. Geofence Check
-
-Check if point enters saved zone.
+Check Geofence Trigger
 
 locview geofence-check \
---lat 19.1606 \
---lon 72.8479
+  --lat 19.1606 \
+  --lon 72.8479
 
 ---
 
-8. Trend Analysis
-
-Analyze historical POI trends.
+Trend Analysis
 
 locview trend \
---lat 19.1606 \
---lon 72.8479
+  --lat 19.1606 \
+  --lon 72.8479
 
 ---
 
-9. List Plugins
+Live Tracking
 
-locview plugins
-
----
-
-🖥 TUI Dashboard Guide
-
-Run:
-
-locview tui
-
-Dashboard Buttons:
+locview track \
+  --points \
+  "19.1606,72.8479" \
+  "19.1700,72.8500"
 
 ---
 
-Run Scan
+📁 Export Paths
 
-Performs full intelligence scan.
-
----
-
-Polygon Heatmap
-
-Scans surrounding area and generates hotspot heatmap.
-
----
-
-Open HTML Report
-
-Opens latest generated HTML scan report.
-
----
-
-Open Polygon Report
-
-Opens latest polygon area scan report.
-
----
-
-📁 Export Locations
-
-Generated files save here:
+Generated Reports
 
 /storage/emulated/0/Documents/LocViewReports/
 
-Satellite screenshots save here:
+---
+
+Satellite Screenshots
 
 /storage/emulated/0/Pictures/LocView/
 
@@ -193,98 +152,73 @@ Satellite screenshots save here:
 
 🛠 Troubleshooting
 
----
+POI API Rate Limits (429 / 504)
 
-POI API Rate Limit / 429 Errors
-
-If you see:
-
-429 Too Many Requests
-
-It means POI providers are rate-limiting requests.
-
-Fix:
+If Overpass API returns rate-limit errors:
 
 - Wait 30–60 seconds
-- Reduce polygon scan size
-- Increase polygon step size
+- Reduce polygon scan area
+- Increase polygon scan step size
 
 ---
 
-HTML Report Not Opening
+Reports Not Opening
 
-Ensure Termux API installed:
+Install Termux API:
 
 pkg install termux-api
 
 ---
 
-Permission Issues
-
-Grant storage permission:
+Storage Permission Issues
 
 termux-setup-storage
 
 ---
 
-Broken Install / Dependency Errors
-
-Reinstall:
-
-pip install -r requirements.txt --upgrade
-pip install -e . --force-reinstall
-
----
-
-📌 Project Structure
+🗂 Project Structure
 
 locview/
-├── providers/      # External data providers
-├── export/         # Report generation
-├── core/           # Scan engines
-├── tui/            # Dashboard UI
-├── intel/          # Scoring / Risk / Trend engines
-├── alerts/         # Geofence logic
-├── live/           # Tracking engine
+├── providers/     # Data providers / APIs
+├── core/          # Scan engines
+├── export/        # Report generation
+├── tui/           # Interactive dashboard
+├── intel/         # Risk / scoring / trends
+├── alerts/        # Geofence logic
+├── live/          # Tracking engine
 
 ---
 
-🤝 Support / Feedback
+🤝 Contributing
 
-If you encounter bugs:
+Contributions, bug reports, and feature requests are welcome.
 
-1. Open GitHub Issues
-2. Include:
-   - Error Screenshot
-   - Command Used
-   - Logs / Traceback
-   - Device / OS Info
+Please include:
 
-GitHub Repo:
-
-https://github.com/Max000110/locview
+- Error traceback
+- Reproduction steps
+- Device / OS info
+- Screenshots / logs
 
 ---
 
 📜 License
 
-MIT License
+Licensed under the MIT License.
+
+You may use, modify, distribute, and sublicense this software under the terms of the MIT License.
+
+See the "LICENSE" (LICENSE) file for full legal text.
 
 ---
 
-⭐ Credits
+⭐ Author
 
 Built by Max000110
 
 ---
 
-🔮 Roadmap
+⚠ Disclaimer
 
-Planned Future Features:
-
-- Multi-provider POI engine
-- Advanced satellite imagery layers
-- ML hotspot prediction
-- Route analysis
-- Web dashboard
-- Plugin marketplace
+LocView is intended for educational, research, and legitimate geospatial analysis purposes only.
+Users are responsible for complying with applicable laws and provider terms.
